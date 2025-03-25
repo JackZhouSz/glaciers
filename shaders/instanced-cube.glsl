@@ -22,7 +22,7 @@ out vec2  cellCenter;
 out vec3  eyePos;
 out vec3  worldNormal;
 out float cubeHeight;
-out ivec2 cellCoords;
+out flat ivec2 cellCoords;
 
 void main(void)
 {
@@ -50,7 +50,7 @@ in vec2  cellCenter;
 in vec3  eyePos;
 in vec3  worldNormal;
 in float cubeHeight;
-in ivec2 cellCoords;
+in flat ivec2 cellCoords;
 
 // uniforms
 uniform vec4  u_materialAmbient;
