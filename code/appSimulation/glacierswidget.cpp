@@ -75,8 +75,8 @@ void GlaciersWidget::initializeGL()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    shaderCubes = read_program("./shaders/instanced-cube.glsl");
     skyboxShader = read_program("./shaders/skybox.glsl");
+    shaderCubes = read_program("./shaders/instanced-cube.glsl");
 
     glGenVertexArrays(1, &skyboxVAO);
     initializeCubeVAO();
@@ -702,8 +702,8 @@ void GlaciersWidget::setRenderType(bool voxels, bool bedrock, bool ice)
 
 void GlaciersWidget::mousePressEvent(QMouseEvent * e)
 {
-    x0 = e->globalX();
-    y0 = e->globalY();
+    x0 = e->globalPosition().x();
+    y0 = e->globalPosition().y();
 
     if (e->modifiers() & Qt::ControlModifier) {
 		Ray ray = camera.pixelToRay(e->pos().x(), e->pos().y() - 1, width(), height());
@@ -728,8 +728,8 @@ void GlaciersWidget::mousePressEvent(QMouseEvent * e)
 
 void GlaciersWidget::mouseMoveEvent(QMouseEvent * e)
 {
-    int x = e->globalX();
-    int y = e->globalY();
+    int x = e->globalPosition().x();
+    int y = e->globalPosition().y();
 
     if (e->modifiers() & Qt::ControlModifier) {
 		const QPoint& pixel = e->pos();
@@ -758,13 +758,13 @@ void GlaciersWidget::mouseMoveEvent(QMouseEvent * e)
 			camera.backForth((y - y0) * currentDist);
 			camera.setAt(previousAt);
 		}
-		else if (e->buttons() & Qt::MidButton) {
+        else if (e->buttons() & Qt::MiddleButton) {
 			camera.leftRightPlane((x - x0) * 1.0);
 			camera.upDownPlane((y - y0) * 1.0);
 		}
 
-		x0 = e->globalX();
-		y0 = e->globalY();
+        x0 = e->globalPosition().x();
+        y0 = e->globalPosition().y();
 
 		validAnchor = false;
 	}

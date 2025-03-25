@@ -4,7 +4,7 @@
 #include "glew.h"
 #include <QtGui/QKeyEvent>
 #include <QtGui/QMouseEvent>
-#include <QtWidgets/QOpenGLWidget>
+#include <QOpenGLWidget>
 #include "scalarfield2.h"
 #include "glacierterrain.h"
 

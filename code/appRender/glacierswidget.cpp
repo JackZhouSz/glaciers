@@ -210,16 +210,16 @@ void GlaciersWidget::setTexture(const QImage& img)
 
 void GlaciersWidget::mousePressEvent(QMouseEvent * e)
 {
-    x0 = e->globalX();
-    y0 = e->globalY();
+    x0 = e->globalPosition().x();
+    y0 = e->globalPosition().y();
 
     update();
 }
 
 void GlaciersWidget::mouseMoveEvent(QMouseEvent * e)
 {
-    int x = e->globalX();
-    int y = e->globalY();
+    int x = e->globalPosition().x();
+    int y = e->globalPosition().y();
 
 	if (e->buttons() & Qt::LeftButton) {
 		camera.leftRightRound((x0 - x) * 0.01);
@@ -232,13 +232,13 @@ void GlaciersWidget::mouseMoveEvent(QMouseEvent * e)
 		camera.backForth((y - y0) * currentDist);
 		camera.setAt(previousAt);
 	}
-	else if (e->buttons() & Qt::MidButton) {
+    else if (e->buttons() & Qt::MiddleButton) {
 		camera.leftRightPlane((x - x0) * 1.0);
 		camera.upDownPlane((y - y0) * 1.0);
 	}
 
-	x0 = e->globalX();
-	y0 = e->globalY();
+    x0 = e->globalPosition().x();
+    y0 = e->globalPosition().y();
 
     update();
 }
